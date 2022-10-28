@@ -2,7 +2,7 @@
 import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import Axios from "axios";
-import { Link } from "react-router-dom";
+import { useNavigate ,Link } from "react-router-dom";
 import ModalBox from "../modal-box/modal-box.component";
 
 const defaultFormField = {
@@ -18,6 +18,7 @@ export default function RegisterForm() {
   const { name, age, contact, username, password } = formField;
   const [showModal, setShowModal] = useState(false);
   const [modalValue, setModalValue] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -27,7 +28,7 @@ export default function RegisterForm() {
     });
   };
 
-  const alertModal = (message) => {
+  const modalAlert = (message) => {
     setModalValue(message);
     setShowModal(true);
   };
@@ -39,11 +40,11 @@ export default function RegisterForm() {
       ...formField,
     }).then((res) => {
       if (res.data.code === "ER_DUP_ENTRY") {
-        alert("User already exist. Please choose different username");
+        modalAlert("User already exist. Please choose different username");
       } else {
         setFormField(defaultFormField);
-        alertModal("Registration successful");
-        // navigate("/");
+        modalAlert("Registration successful");
+        setTimeout(()=>{navigate("/")}, 3000)
       }
     });
   };
@@ -63,6 +64,7 @@ export default function RegisterForm() {
           type="number"
           value={age}
           onChange={handleChange}
+          min="10"
           required
         />
         <FormInput
