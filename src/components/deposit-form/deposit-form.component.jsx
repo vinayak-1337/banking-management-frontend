@@ -32,7 +32,7 @@ export default function DipositForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    Axios.post("https://banking-management-backend.herokuapp.com/deposit", {
+    Axios.post(`${process.env.REACT_APP_BASE_URL}/deposit`, {
       id: id,
       amount: amount,
     }).then((res) => console.log(res.data));
@@ -55,7 +55,7 @@ export default function DipositForm() {
           min="500"
           max="50000"
         />
-        <FormInput type="submit" value="submit" />
+        <FormInput type="submit" value="Submit" />
       </form>
       <BackButton />
       <ModalBox

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import Axios from "axios";
@@ -34,7 +35,7 @@ export default function RegisterForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    Axios.post("https://banking-management-backend.herokuapp.com/create", {
+    Axios.post(`${process.env.REACT_APP_BASE_URL}/create`, {
       ...formField,
     }).then((res) => {
       if (res.data.code === "ER_DUP_ENTRY") {

@@ -33,7 +33,7 @@ export default function LoginForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    Axios.post("https://banking-management-backend.herokuapp.com/login", {
+    Axios.post(`${process.env.REACT_APP_BASE_URL}/login`, {
       ...formField,
     }).then((res) => {
       if (typeof res.data === "object") {
