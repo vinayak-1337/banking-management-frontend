@@ -1,0 +1,22 @@
+.navigation-container {
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+}
+
+.nav-link {
+  background-color: #222222;
+  color: #f3f3f3;
+  padding: 10px 20px;
+  margin: 5px 0;
+  width: 300px;
+  font-size: 25px;
+  box-shadow: 3px 3px 6px 1px #636363;
+}
+
+.nav-link:hover {
+  transform: scale(1.02);
+}

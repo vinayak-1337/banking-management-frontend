@@ -1,0 +1,48 @@
+header {
+  background-color: #222222;
+  height: 100px;
+  color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+
+#title {
+  color: #f2f2f2;
+  font-size: 40px;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 100px);
+}
+
+.form-container {
+  background-color: #222222;
+  display: block;
+  color: #f2f2f2;
+  padding: 20px 20px;
+  width: 400px;
+  text-align: left;
+  border-radius: 3px;
+}
+
+.nav-link.back-button {
+  width: 100%;
+}
+
+button {
+  border: none;
+  outline: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+label, .user-name {
+  text-transform: capitalize;
+}
