@@ -9,7 +9,7 @@ export default function ModalBox({value, show, onClose}) {
     <div className='modal-container'>
       <div className="modal-content">
         <p>{value}</p>
-        <button className='close-button' onClick={onClose}>close</button>
+        <button className='close-button' onClick={onClose}>Close</button>
       </div>
     </div>
   )
