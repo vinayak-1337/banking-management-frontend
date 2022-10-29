@@ -56,8 +56,10 @@ export default function MoneyTransfer() {
         });
         modalAlert("Transfer successful");
       })
-      .catch((err) => {
-        if (err.response.status === 404) {
+      .catch((error) => {
+        if (error.code === "ERR_NETWORK") {
+          modalAlert("Couldn't connect to server");
+        } else if (error.response.status === 404) {
           modalAlert("User not found");
         }
         setLoading(false);

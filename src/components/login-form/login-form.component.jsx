@@ -38,22 +38,28 @@ export default function LoginForm() {
     setLoading(true);
     Axios.post(`${process.env.REACT_APP_BASE_URL}/login`, {
       ...formField,
-    }).then((res) => {
-      setLoading(false);
-      if (typeof res.data === "object") {
-        console.log(res.data);
-        const { id, name, username, balance } = res.data;
-        setCurrentUser({
-          id,
-          username,
-          name,
-          balance,
-        });
-        navigate("/");
-      } else {
-        modalAlert("Incorrect username or password!");
-      }
-    });
+    })
+      .then((res) => {
+        setLoading(false);
+        if (typeof res.data === "object") {
+          const { id, name, username, balance } = res.data;
+          setCurrentUser({
+            id,
+            username,
+            name,
+            balance,
+          });
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        if (error.code === "ERR_NETWORK") {
+          modalAlert("Couldn't connect to server");
+        } else if (error.response.status === 403) {
+          modalAlert("Incorrect username or password!");
+        }
+        setLoading(false);
+      });
   };
 
   return (

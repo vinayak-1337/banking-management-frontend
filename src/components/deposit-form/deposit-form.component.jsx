@@ -43,6 +43,11 @@ export default function DipositForm() {
       setCurrentUser({ ...currentUser, balance: balance + amount });
       setFormField(defaultFormField);
       modalAlert("Deposit Successful");
+    }).catch((error) => {
+      if (error.code === "ERR_NETWORK") {
+          modalAlert("Couldn't connect to server");
+      }
+      setLoading(false);
     });
 
   };
