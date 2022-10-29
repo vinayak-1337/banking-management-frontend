@@ -4,6 +4,7 @@ import FormInput from "../form-input/form-input.component";
 import { UserContext } from "../../context/user.context";
 import BackButton from "../back-button/back-button.component";
 import ModalBox from "../modal-box/modal-box.component";
+import LoadingBox from "../loading-box/loading-box.component";
 
 const defaultFormField = {
   receiver: "",
@@ -14,6 +15,7 @@ export default function MoneyTransfer() {
   const [formField, setFormField] = useState(defaultFormField);
   const [showModal, setShowModal] = useState(false);
   const [modalValue, setModalValue] = useState("");
+  const [showLoading, setLoading] = useState(false);
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const { receiver, amount } = formField;
 
@@ -40,13 +42,14 @@ export default function MoneyTransfer() {
       modalAlert("Insufficient funds");
       return;
     }
+    setLoading(true);
     Axios.post(`${process.env.REACT_APP_BASE_URL}/transfer`, {
       senderId: currentUser.id,
       receiverUsername: receiver,
       amount: amount,
     })
       .then((res) => {
-        console.log(res.data);
+        setLoading(false);
         setCurrentUser({
           ...currentUser,
           balance: currentUser.balance - amount,
@@ -57,6 +60,7 @@ export default function MoneyTransfer() {
         if (err.response.status === 404) {
           modalAlert("User not found");
         }
+        setLoading(false);
       });
   };
 
@@ -88,6 +92,7 @@ export default function MoneyTransfer() {
         value={modalValue}
         show={showModal}
       />
+      <LoadingBox show={showLoading} />
     </div>
   );
 }

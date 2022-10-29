@@ -4,6 +4,7 @@ import FormInput from "../form-input/form-input.component";
 import Axios from "axios";
 import { useNavigate ,Link } from "react-router-dom";
 import ModalBox from "../modal-box/modal-box.component";
+import LoadingBox from "../loading-box/loading-box.component";
 
 const defaultFormField = {
   name: "",
@@ -17,6 +18,7 @@ export default function RegisterForm() {
   const [formField, setFormField] = useState(defaultFormField);
   const { name, age, contact, username, password } = formField;
   const [showModal, setShowModal] = useState(false);
+  const [showLoading, setLoading] = useState(false);
   const [modalValue, setModalValue] = useState("");
   const navigate = useNavigate();
 
@@ -35,10 +37,12 @@ export default function RegisterForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setLoading(true);
 
     Axios.post(`${process.env.REACT_APP_BASE_URL}/create`, {
       ...formField,
     }).then((res) => {
+      setLoading(false);
       if (res.data.code === "ER_DUP_ENTRY") {
         modalAlert("User already exist. Please choose different username");
       } else {
@@ -46,7 +50,7 @@ export default function RegisterForm() {
         modalAlert("Registration successful");
         setTimeout(()=>{navigate("/")}, 3000)
       }
-    });
+    }).catch((error) => console.log(error));
   };
 
   return (
@@ -101,6 +105,7 @@ export default function RegisterForm() {
         value={modalValue}
         show={showModal}
       />
+      <LoadingBox show={showLoading}/>
     </div>
   );
 }

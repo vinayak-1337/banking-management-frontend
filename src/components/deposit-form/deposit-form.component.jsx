@@ -4,6 +4,7 @@ import Axios from "axios";
 import { UserContext } from "../../context/user.context";
 import BackButton from "../back-button/back-button.component";
 import ModalBox from "../modal-box/modal-box.component";
+import LoadingBox from "../loading-box/loading-box.component";
 
 const defaultFormField = {
   amount: "",
@@ -12,6 +13,7 @@ const defaultFormField = {
 export default function DipositForm() {
   const [showModal, setShowModal] = useState(false);
   const [modalValue, setModalValue] = useState("");
+  const [showLoading, setLoading] = useState(false);
   const [formField, setFormField] = useState(defaultFormField);
   const { amount } = formField;
   const { currentUser, setCurrentUser } = useContext(UserContext);
@@ -31,15 +33,18 @@ export default function DipositForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setLoading(true);
 
     Axios.post(`${process.env.REACT_APP_BASE_URL}/deposit`, {
       id: id,
       amount: amount,
-    }).then((res) => console.log(res.data));
+    }).then((res) => {
+      setLoading(false);
+      setCurrentUser({ ...currentUser, balance: balance + amount });
+      setFormField(defaultFormField);
+      modalAlert("Deposit Successful");
+    });
 
-    setCurrentUser({ ...currentUser, balance: balance + amount });
-    setFormField(defaultFormField);
-    modalAlert("Deposit Successful");
   };
 
   return (
@@ -65,6 +70,7 @@ export default function DipositForm() {
         value={modalValue}
         show={showModal}
       />
+      <LoadingBox show={showLoading} />
     </div>
   );
 }

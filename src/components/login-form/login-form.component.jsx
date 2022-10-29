@@ -4,6 +4,7 @@ import Axios from "axios";
 import { UserContext } from "../../context/user.context";
 import { Link, useNavigate } from "react-router-dom";
 import ModalBox from "../modal-box/modal-box.component";
+import LoadingBox from "../loading-box/loading-box.component";
 
 const defaultFormField = {
   username: "",
@@ -14,6 +15,7 @@ export default function LoginForm() {
   const [formField, setFormField] = useState(defaultFormField);
   const [showModal, setShowModal] = useState(false);
   const [modalValue, setModalValue] = useState("");
+  const [showLoading, setLoading] = useState(false);
   const { username, password } = formField;
   const { setCurrentUser } = useContext(UserContext);
   const navigate = useNavigate();
@@ -33,9 +35,11 @@ export default function LoginForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setLoading(true);
     Axios.post(`${process.env.REACT_APP_BASE_URL}/login`, {
       ...formField,
     }).then((res) => {
+      setLoading(false);
       if (typeof res.data === "object") {
         console.log(res.data);
         const { id, name, username, balance } = res.data;
@@ -81,6 +85,7 @@ export default function LoginForm() {
         value={modalValue}
         show={showModal}
       />
+      <LoadingBox show={showLoading} />
     </div>
   );
 }
