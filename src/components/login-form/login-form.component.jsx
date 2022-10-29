@@ -42,13 +42,15 @@ export default function LoginForm() {
       .then((res) => {
         setLoading(false);
         if (typeof res.data === "object") {
-          const { id, name, username, balance } = res.data;
+          const { id, name, username, balance } = res.data.userData;
           setCurrentUser({
             id,
             username,
             name,
             balance,
           });
+          let accessToken = res.data.accessToken;
+          sessionStorage.setItem("accessToken", accessToken);
           navigate("/");
         }
       })
