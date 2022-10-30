@@ -33,13 +33,12 @@ export default function LoginForm() {
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
-    Axios.get(`${process.env.REACT_APP_BASE_URL}/getUser`, config)
+    token && Axios.get(`${process.env.REACT_APP_BASE_URL}/getUser`, config)
       .then((response) => {
-        console.log(response);
         setCurrentUser({...response.data});
       })
       .catch((error) => console.log(error));
-  }, []);
+  },[]);
 
   const modalAlert = (message) => {
     setModalValue(message);
@@ -70,7 +69,7 @@ export default function LoginForm() {
       .catch((error) => {
         if (error.code === "ERR_NETWORK") {
           modalAlert("Couldn't connect to server");
-        } else if (error.response.status === 403) {
+        } else if (error.response.status === 403 || error.response.status === 404) {
           modalAlert("Incorrect username or password!");
         }
         setLoading(false);
