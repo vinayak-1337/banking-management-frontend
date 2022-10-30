@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import FormInput from "../form-input/form-input.component";
 import Axios from "axios";
 import { UserContext } from "../../context/user.context";
@@ -27,6 +27,19 @@ export default function LoginForm() {
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    const token = sessionStorage.getItem("accessToken");
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+    };
+    Axios.get(`${process.env.REACT_APP_BASE_URL}/getUser`, config)
+      .then((response) => {
+        console.log(response);
+        setCurrentUser({...response.data});
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   const modalAlert = (message) => {
     setModalValue(message);
