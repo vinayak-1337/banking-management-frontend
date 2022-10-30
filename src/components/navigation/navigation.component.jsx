@@ -7,6 +7,7 @@ export default function Navigation() {
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const handleClick = () => {
     setCurrentUser({});
+    sessionStorage.removeItem("accessToken");
   };
   const firstName = currentUser.name.split(" ")[0];
   return (
