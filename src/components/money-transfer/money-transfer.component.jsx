@@ -7,7 +7,7 @@ import ModalBox from "../modal-box/modal-box.component";
 import LoadingBox from "../loading-box/loading-box.component";
 
 const defaultFormField = {
-  receiver: "",
+  receiverAccountNumber: "",
   amount: 0,
 };
 
@@ -17,7 +17,7 @@ export default function MoneyTransfer() {
   const [modalValue, setModalValue] = useState("");
   const [showLoading, setLoading] = useState(false);
   const { currentUser, setCurrentUser } = useContext(UserContext);
-  const { receiver, amount } = formField;
+  const { receiverAccountNumber, amount } = formField;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -34,7 +34,7 @@ export default function MoneyTransfer() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (receiver === currentUser.username) {
+    if (receiverAccountNumber == currentUser.accountNumber) {
       modalAlert("For self transfer use deposit option");
       return;
     }
@@ -44,8 +44,8 @@ export default function MoneyTransfer() {
     }
     setLoading(true);
     Axios.post(`${process.env.REACT_APP_BASE_URL}/transfer`, {
-      senderId: currentUser.id,
-      receiverUsername: receiver,
+      senderAccountNumber: currentUser.accountNumber,
+      receiverAccountNumber,
       amount: amount,
     })
       .then((res) => {
@@ -70,10 +70,10 @@ export default function MoneyTransfer() {
     <div className="transfer-container">
       <form className="form-container" onSubmit={handleSubmit}>
         <FormInput
-          name="receiver"
-          info="username"
-          type="text"
-          value={receiver}
+          name="receiverAccountNumber"
+          displayName="Account Number"
+          type="number"
+          value={receiverAccountNumber}
           onChange={handleChange}
           required
         />

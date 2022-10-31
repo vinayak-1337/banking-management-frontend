@@ -36,6 +36,7 @@ export default function LoginForm() {
     token &&
       Axios.get(`${process.env.REACT_APP_BASE_URL}/getUser`, config)
         .then((response) => {
+          setLoading(false);
           setCurrentUser({ ...response.data });
         })
         .catch((error) => console.log(error));
