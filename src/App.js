@@ -9,9 +9,10 @@ import UserDashboard from "./routes/user-dashboard/user-dashboard.component";
 import MoneyTransfer from "./components/money-transfer/money-transfer.component";
 import DepositForm from "./components/deposit-form/deposit-form.component";
 import Balance from "./components/balance/balance.component";
+import Profile from "./components/profile/profile.components";
 
 function App() {
-  const {currentUser} = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   return (
     <Routes>
       <Route path="/" element={<Home />}>
@@ -26,6 +27,7 @@ function App() {
         <Route path="transfer" element={<MoneyTransfer />} />
         <Route path="deposit" element={<DepositForm />} />
         <Route path="balance" element={<Balance />} />
+        <Route path="profile" element={<Profile />} />
       </Route>
     </Routes>
   );
