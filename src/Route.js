@@ -18,11 +18,12 @@ function MainRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Navigations />}>
-        {Object.keys(currentUser).length === 0 ? (
+        {/* {Object.keys(currentUser).length === 0 ? (
           <Route index element={<LoginForm />} />
         ) : (
           <Route index element={<UserDashboard />} />
-        )}
+        )} */}
+        <Route index element={<Home />} />
 
         <Route path="register" element={<RegisterForm />} />
         <Route path="login" element={<LoginForm />} />

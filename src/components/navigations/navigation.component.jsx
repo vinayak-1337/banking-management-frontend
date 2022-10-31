@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import "./navigation.styles.css";
 
 export default function Navigations() {
   return (
