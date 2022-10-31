@@ -3,6 +3,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Home from "./routes/home/home.component";
 import { UserContext } from "./context/user.context";
+import Navigations from "./components/navigations/navigation.component";
 import RegisterForm from "./components/register-form/register-form.component";
 import LoginForm from "./components/login-form/login-form.component";
 import UserDashboard from "./routes/user-dashboard/user-dashboard.component";
@@ -16,7 +17,7 @@ function MainRoutes() {
   const { currentUser } = useContext(UserContext);
   return (
     <Routes>
-      <Route path="/" element={<Home />}>
+      <Route path="/" element={<Navigations />}>
         {Object.keys(currentUser).length === 0 ? (
           <Route index element={<LoginForm />} />
         ) : (

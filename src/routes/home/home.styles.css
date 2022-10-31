@@ -3,17 +3,38 @@ header {
   display: flex;
   justify-content: space-between;
   align-content: center;
+  padding: 20px 100px;
 }
 
-header .left {
+header div {
   display: flex;
   justify-content: center;
   align-items: center;
+  column-gap: 10px;
+}
+
+.header-login {
+  background-color: #1726f3;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 34px;
+  padding: 10px 20px;
+  font-weight: 600;
+}
+
+header .middle {
+  display: flex;
+  column-gap: 30px;
+}
+
+.header-link {
+  color: black;
+  font-weight: 600;
 }
 
 #title {
   color: #000;
-  font-size: 40px;
+  font-size: 30px;
 }
 
 #logo {
