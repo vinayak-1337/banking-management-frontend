@@ -1,0 +1,21 @@
+header {
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+header .left {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#title {
+  color: #000;
+  font-size: 40px;
+}
+
+#logo {
+  width: 50px;
+}
