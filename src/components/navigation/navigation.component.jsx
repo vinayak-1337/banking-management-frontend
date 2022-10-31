@@ -17,6 +17,9 @@ export default function Navigation() {
           <h2>
             Hello, <span className="user-name">{firstName}</span>{" "}
           </h2>
+          <Link className="nav-link" to="profile">
+            My Profile
+          </Link>
           <Link className="nav-link" to="balance">
             Balance
           </Link>
