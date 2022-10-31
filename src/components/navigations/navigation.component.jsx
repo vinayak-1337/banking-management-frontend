@@ -23,9 +23,7 @@ export default function Navigations() {
           </Link>
         </div>
       </header>
-      <main>
         <Outlet />
-      </main>
     </>
   );
 }
