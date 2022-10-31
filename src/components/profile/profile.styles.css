@@ -1,0 +1,22 @@
+.profile-container {
+  text-align: left;
+  padding: 20px;
+  width: 300px;
+  border: 2px solid #000;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.profile-container > p {
+  font-size: 20px;
+}
+
+.profile-container .name-box {
+  text-transform: capitalize;
+}
+
+.profile-container > p > span {
+  font-weight: 700;
+}

@@ -10,14 +10,14 @@ const defaultFormField = {
   amount: "",
 };
 
-export default function DipositForm() {
+export default function DepositForm() {
   const [showModal, setShowModal] = useState(false);
   const [modalValue, setModalValue] = useState("");
   const [showLoading, setLoading] = useState(false);
   const [formField, setFormField] = useState(defaultFormField);
   const { amount } = formField;
   const { currentUser, setCurrentUser } = useContext(UserContext);
-  const { id, balance } = currentUser;
+  const { accountNumber, balance } = currentUser;
 
   const handleChange = (event) => {
     const { value } = event.target;
@@ -36,20 +36,21 @@ export default function DipositForm() {
     setLoading(true);
 
     Axios.post(`${process.env.REACT_APP_BASE_URL}/deposit`, {
-      id: id,
-      amount: amount,
-    }).then((res) => {
-      setLoading(false);
-      setCurrentUser({ ...currentUser, balance: balance + amount });
-      setFormField(defaultFormField);
-      modalAlert("Deposit Successful");
-    }).catch((error) => {
-      if (error.code === "ERR_NETWORK") {
+      accountNumber,
+      amount,
+    })
+      .then((res) => {
+        setLoading(false);
+        setCurrentUser({ ...currentUser, balance: balance + amount });
+        setFormField(defaultFormField);
+        modalAlert("Deposit Successful");
+      })
+      .catch((error) => {
+        if (error.code === "ERR_NETWORK") {
           modalAlert("Couldn't connect to server");
-      }
-      setLoading(false);
-    });
-
+        }
+        setLoading(false);
+      });
   };
 
   return (

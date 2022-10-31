@@ -1,6 +1,7 @@
 import { useContext, useEffect } from "react";
 import { UserContext } from "../../context/user.context";
 import Axios from "axios";
+import BackButton from "../back-button/back-button.component";
 import "./profile.styles.css";
 
 export default function Profile() {
@@ -23,7 +24,7 @@ export default function Profile() {
 
   return (
     <div className="profile-container">
-      <p>
+      <p className="name-box">
         <span>Name : </span>
         {name}
       </p>
@@ -43,6 +44,7 @@ export default function Profile() {
         <span>Account No. : </span>
         {accountNumber}
       </p>
+      <BackButton />
     </div>
   );
 }

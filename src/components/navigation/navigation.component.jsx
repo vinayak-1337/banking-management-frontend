@@ -23,11 +23,8 @@ export default function Navigation() {
           <Link className="nav-link" to="balance">
             Balance
           </Link>
-          <Link className="nav-link" to="deposit">
-            Deposit
-          </Link>
-          <Link className="nav-link" to="transfer">
-            Transfer Money
+          <Link className="nav-link" to="fund-transfer">
+            Fund Transfer
           </Link>
           <button className="nav-link" onClick={handleClick}>
             Log out
