@@ -33,13 +33,14 @@ export default function LoginForm() {
     const config = {
       headers: { Authorization: `Bearer ${token}` },
     };
-    token && Axios.get(`${process.env.REACT_APP_BASE_URL}/getUser`, config)
-      .then((response) => {
-        setCurrentUser({...response.data});
-      })
-      .catch((error) => console.log(error));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
+    token &&
+      Axios.get(`${process.env.REACT_APP_BASE_URL}/getUser`, config)
+        .then((response) => {
+          setCurrentUser({ ...response.data });
+        })
+        .catch((error) => console.log(error));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const modalAlert = (message) => {
     setModalValue(message);
@@ -55,12 +56,15 @@ export default function LoginForm() {
       .then((res) => {
         setLoading(false);
         if (typeof res.data === "object") {
-          const { id, name, username, balance } = res.data.userData;
+          const { id, name, username, age, balance, accountNumber } =
+            res.data.userData;
           setCurrentUser({
             id,
             username,
             name,
             balance,
+            accountNumber,
+            age,
           });
           let accessToken = res.data.accessToken;
           sessionStorage.setItem("accessToken", accessToken);
@@ -70,7 +74,10 @@ export default function LoginForm() {
       .catch((error) => {
         if (error.code === "ERR_NETWORK") {
           modalAlert("Couldn't connect to server");
-        } else if (error.response.status === 403 || error.response.status === 404) {
+        } else if (
+          error.response.status === 403 ||
+          error.response.status === 404
+        ) {
           modalAlert("Incorrect username or password!");
         }
         setLoading(false);
