@@ -6,6 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import ModalBox from "../modal-box/modal-box.component";
 import LoadingBox from "../loading-box/loading-box.component";
 
+import "./login-form.styles.css"
+
 const defaultFormField = {
   username: "",
   password: "",
@@ -89,13 +91,14 @@ export default function LoginForm() {
     <div className="login-container">
       {/* <p className="message"></p> */}
       <form className="form-container" onSubmit={handleSubmit}>
-        <h3 className="greetings">Hello Again!</h3>
+        <h3 className="login-greetings">Hello Again!</h3>
         <FormInput
           name="username"
           type="text"
           placeholder="Enter username"
           value={username}
           onChange={handleChange}
+          className="login-form-input"
           required
         />
         <FormInput
@@ -104,11 +107,12 @@ export default function LoginForm() {
           placeholder="Password"
           value={password}
           onChange={handleChange}
+          className="login-form-input"
           required
         />
-        <FormInput className="submit-button" type="submit" value="Log in" />
+        <FormInput className="login-button" type="submit" value="Log in" />
         <p className="other-option">
-          First Time User? <Link to="register">Register Here</Link>
+          First Time User? <Link to="/register">Register Here</Link>
         </p>
       </form>
       <ModalBox
