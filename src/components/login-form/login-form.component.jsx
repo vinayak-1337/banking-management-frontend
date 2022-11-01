@@ -87,10 +87,13 @@ export default function LoginForm() {
 
   return (
     <div className="login-container">
+      {/* <p className="message"></p> */}
       <form className="form-container" onSubmit={handleSubmit}>
+        <h3 className="greetings">Hello Again!</h3>
         <FormInput
           name="username"
           type="text"
+          placeholder="Enter username"
           value={username}
           onChange={handleChange}
           required
@@ -98,15 +101,16 @@ export default function LoginForm() {
         <FormInput
           name="password"
           type="password"
+          placeholder="Password"
           value={password}
           onChange={handleChange}
           required
         />
-        <FormInput type="submit" value="submit" />
+        <FormInput className="submit-button" type="submit" value="Log in" />
+        <p className="other-option">
+          First Time User? <Link to="register">Register Here</Link>
+        </p>
       </form>
-      <p>
-        First Time User? <Link to="register">Register Here</Link>
-      </p>
       <ModalBox
         onClose={() => {
           setShowModal(false);
