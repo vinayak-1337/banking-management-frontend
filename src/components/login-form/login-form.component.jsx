@@ -38,7 +38,6 @@ export default function LoginForm() {
     token &&
       Axios.get(`${process.env.REACT_APP_BASE_URL}/getUser`, config)
         .then((response) => {
-          setLoading(false);
           setCurrentUser({ ...response.data });
         })
         .catch((error) => console.log(error));
@@ -71,7 +70,7 @@ export default function LoginForm() {
           });
           let accessToken = res.data.accessToken;
           sessionStorage.setItem("accessToken", accessToken);
-          navigate("/");
+          navigate("/dashboard");
         }
       })
       .catch((error) => {
