@@ -5,6 +5,8 @@ import { useNavigate, Link } from "react-router-dom";
 import ModalBox from "../modal-box/modal-box.component";
 import LoadingBox from "../loading-box/loading-box.component";
 
+import "./register-form.styles.css";
+
 const defaultFormField = {
   name: "",
   age: "",
@@ -62,48 +64,59 @@ export default function RegisterForm() {
   return (
     <div className="register-container">
       <form className="form-container" onSubmit={handleSubmit}>
+      <h3 className="register-greetings">Get Started</h3>
         <FormInput
           name="name"
           type="text"
+          placeholder="Your name"
           value={name}
           onChange={handleChange}
+          className="register-form-input"
           required
         />
         <FormInput
           name="age"
           type="number"
+          placeholder="Age"
           value={age}
           onChange={handleChange}
           min="10"
+          className="register-form-input"
           required
         />
         <FormInput
           name="contact"
           type="tel"
+          placeholder="Contact"
           value={contact}
           onChange={handleChange}
           pattern="[0-9]{10}"
+          className="register-form-input"
           required
         />
         <FormInput
           name="username"
           type="text"
+          placeholder="Username"
           value={username}
           onChange={handleChange}
+          className="register-form-input"
           required
         />
         <FormInput
           name="password"
           type="password"
+          placeholder="Password"
           value={password}
           onChange={handleChange}
+          className="register-form-input"
           required
         />
-        <FormInput type="submit" value="submit" />
+        <FormInput className="register-button" type="submit" value="Register" />
+        <p className="register-redirect">
+          Already a user. <Link to="/login">Log in</Link>
+        </p>
       </form>
-      <p>
-        Already a user. <Link to="/">Log in</Link>
-      </p>
       <ModalBox
         onClose={() => {
           setShowModal(false);
