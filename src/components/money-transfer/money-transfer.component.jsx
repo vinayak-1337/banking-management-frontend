@@ -70,8 +70,14 @@ export default function MoneyTransfer() {
       });
   };
 
+  const preventNumberChange = (e) => {
+    if (e.which === 38 || e.which === 40) {
+      e.preventDefault();
+    }
+  }
+
   return (
-    <div className="transfer-container" >
+    <div className="transfer-container">
       <form className="form-container" onSubmit={handleSubmit}>
         <h3 className="transfer-title">Bank transfer</h3>
         <FlashAlert show={showModal} value={alertValue}  type={alertType}/>
@@ -82,7 +88,7 @@ export default function MoneyTransfer() {
           value={receiverAccountNumber}
           onChange={handleChange}
           className="transfer-input"
-          onWheel={() => null}
+          onKeyDown={preventNumberChange}
           required
         />
         <FormInput
