@@ -19,8 +19,12 @@ export default function LoginForm() {
   const [modalValue, setModalValue] = useState("");
   const [showLoading, setLoading] = useState(false);
   const { username, password } = formField;
-  const { setCurrentUser } = useContext(UserContext);
+  const {currentUser, setCurrentUser } = useContext(UserContext);
   const navigate = useNavigate();
+
+  if(Object.keys(currentUser).length !== 0) {
+    navigate("dashboard");
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
