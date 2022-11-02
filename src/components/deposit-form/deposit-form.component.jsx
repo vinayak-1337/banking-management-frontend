@@ -6,6 +6,8 @@ import BackButton from "../back-button/back-button.component";
 import ModalBox from "../modal-box/modal-box.component";
 import LoadingBox from "../loading-box/loading-box.component";
 
+import "./deposit-form.styles.css";
+
 const defaultFormField = {
   amount: "",
 };
@@ -56,19 +58,21 @@ export default function DepositForm() {
   return (
     <div className="deposit-container">
       <form className="form-container" onSubmit={handleSubmit}>
+        <h3 className="deposit-title">Self Transfer</h3>
         <FormInput
           name="amount"
           type="number"
           value={amount}
           onChange={handleChange}
+          placeholder="Amount"
           required
+          className="deposit-input"
           step="500"
           min="500"
           max="50000"
         />
-        <FormInput type="submit" value="Submit" />
+        <FormInput type="submit" className="deposit-button" value="Deposit" />
       </form>
-      <BackButton />
       <ModalBox
         onClose={() => {
           setShowModal(false);

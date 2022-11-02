@@ -44,8 +44,8 @@ export default function Navigations() {
             <div className="header-link fund-transfer">
               Fund Transfer
               <div className="fund-hover">
-                <Link to="self-transfer">Self transfer</Link>
-                <Link to="other-transfer">Other bank transfer</Link>
+                <Link to="dashboard/self-transfer">Self transfer</Link>
+                <Link to="dashboard/other-transfer">Other bank transfer</Link>
               </div>
             </div>
           )}
