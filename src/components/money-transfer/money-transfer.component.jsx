@@ -2,9 +2,10 @@ import Axios from "axios";
 import { useState, useContext } from "react";
 import FormInput from "../form-input/form-input.component";
 import { UserContext } from "../../context/user.context";
-import BackButton from "../back-button/back-button.component";
 import ModalBox from "../modal-box/modal-box.component";
 import LoadingBox from "../loading-box/loading-box.component";
+
+import "./money-transfer.styles.css";
 
 const defaultFormField = {
   receiverAccountNumber: "",
@@ -69,24 +70,27 @@ export default function MoneyTransfer() {
   return (
     <div className="transfer-container">
       <form className="form-container" onSubmit={handleSubmit}>
+        <h3 className="transfer-title">Bank transfer</h3>
         <FormInput
           name="receiverAccountNumber"
-          displayName="Account Number"
+          placeholder="Account Number"
           type="number"
           value={receiverAccountNumber}
           onChange={handleChange}
+          className="transfer-input"
           required
         />
         <FormInput
           name="amount"
           type="number"
+          placeholder="Amount"
           value={amount}
           min="100"
+          className="transfer-input"
           onChange={handleChange}
         />
-        <FormInput type="submit" value="Transfer" />
+        <FormInput className="transfer-button" type="submit" value="Transfer" />
       </form>
-      <BackButton />
       <ModalBox
         onClose={() => {
           setShowModal(false);

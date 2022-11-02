@@ -1,13 +1,4 @@
-.deposit-container {
-
-}
-
-.deposit-title {
-  margin: 30px 0;
-  font-size: 24px;
-}
-
-.deposit-input {
+.transfer-input {
   width: 100%;
   height: 50px;
   margin: 10px 0;
@@ -20,7 +11,12 @@
   background-color: #fff;
 }
 
-.deposit-button {
+.transfer-title {
+  margin: 30px 0;
+  font-size: 24px;
+}
+
+.transfer-button {
   font-size: 20px;
   font-weight: 600;
   height: 50px;
