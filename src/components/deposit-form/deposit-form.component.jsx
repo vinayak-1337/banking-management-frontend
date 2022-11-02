@@ -2,8 +2,9 @@ import { useState, useContext } from "react";
 import FormInput from "../form-input/form-input.component";
 import Axios from "axios";
 import { UserContext } from "../../context/user.context";
-import ModalBox from "../modal-box/modal-box.component";
 import LoadingBox from "../loading-box/loading-box.component";
+import FlashAlert from "../flash-alert/flash-alert.component";
+import { useNavigate } from "react-router-dom";
 
 import "./deposit-form.styles.css";
 
@@ -12,10 +13,12 @@ const defaultFormField = {
 };
 
 export default function DepositForm() {
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-  const [modalValue, setModalValue] = useState("");
+  const [alertValue, setAlertValue] = useState("");
   const [showLoading, setLoading] = useState(false);
   const [formField, setFormField] = useState(defaultFormField);
+  const [alertType, setAlertType] = useState("");
   const { amount } = formField;
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const { accountNumber, balance } = currentUser;
@@ -27,9 +30,10 @@ export default function DepositForm() {
     });
   };
 
-  const modalAlert = (message) => {
-    setModalValue(message);
+  const showAlert = (message, type) => {
+    setAlertValue(message);
     setShowModal(true);
+    setAlertType(type);
   };
 
   const handleSubmit = (event) => {
@@ -44,11 +48,12 @@ export default function DepositForm() {
         setLoading(false);
         setCurrentUser({ ...currentUser, balance: balance + amount });
         setFormField(defaultFormField);
-        modalAlert("Deposit Successful");
+        showAlert("Deposit Successful", "success");
+        setTimeout(() => navigate("/dashboard"), 1000);
       })
       .catch((error) => {
         if (error.code === "ERR_NETWORK") {
-          modalAlert("Couldn't connect to server");
+          showAlert("Couldn't connect to server");
         }
         setLoading(false);
       });
@@ -58,6 +63,7 @@ export default function DepositForm() {
     <div className="deposit-container">
       <form className="form-container" onSubmit={handleSubmit}>
         <h3 className="deposit-title">Self Transfer</h3>
+        <FlashAlert value={alertValue} show={showModal} type={alertType} />
         <FormInput
           name="amount"
           type="number"
@@ -72,13 +78,6 @@ export default function DepositForm() {
         />
         <FormInput type="submit" className="deposit-button" value="Deposit" />
       </form>
-      <ModalBox
-        onClose={() => {
-          setShowModal(false);
-        }}
-        value={modalValue}
-        show={showModal}
-      />
       <LoadingBox show={showLoading} />
     </div>
   );
