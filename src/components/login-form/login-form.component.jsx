@@ -23,7 +23,7 @@ export default function LoginForm() {
   const navigate = useNavigate();
 
   if(Object.keys(currentUser).length !== 0) {
-    navigate("dashboard");
+    navigate("/dashboard");
   }
 
   const handleChange = (event) => {
