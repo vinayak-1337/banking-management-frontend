@@ -2,10 +2,10 @@ import Axios from "axios";
 import { useState, useContext } from "react";
 import FormInput from "../form-input/form-input.component";
 import { UserContext } from "../../context/user.context";
-import ModalBox from "../modal-box/modal-box.component";
 import LoadingBox from "../loading-box/loading-box.component";
 
 import "./money-transfer.styles.css";
+import FlashAlert from "../flash-alert/flash-alert.component";
 
 const defaultFormField = {
   receiverAccountNumber: "",
@@ -15,10 +15,11 @@ const defaultFormField = {
 export default function MoneyTransfer() {
   const [formField, setFormField] = useState(defaultFormField);
   const [showModal, setShowModal] = useState(false);
-  const [modalValue, setModalValue] = useState("");
+  const [alertValue, setAlertValue] = useState("");
   const [showLoading, setLoading] = useState(false);
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const { receiverAccountNumber, amount } = formField;
+  const [alertType, setAlertType] = useState(null);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -28,19 +29,21 @@ export default function MoneyTransfer() {
     });
   };
 
-  const modalAlert = (message) => {
-    setModalValue(message);
+  const showAlert = (message, type) => {
+    setAlertValue(message);
     setShowModal(true);
+    setAlertType(type);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    // eslint-disable-next-line eqeqeq
     if (receiverAccountNumber == currentUser.accountNumber) {
-      modalAlert("For self transfer use deposit option");
+      showAlert("For self transfer use deposit option");
       return;
     }
     if (amount > currentUser.balance) {
-      modalAlert("Insufficient funds");
+      showAlert("Insufficient funds");
       return;
     }
     setLoading(true);
@@ -55,13 +58,13 @@ export default function MoneyTransfer() {
           ...currentUser,
           balance: currentUser.balance - amount,
         });
-        modalAlert("Transfer successful");
+        showAlert("Transfer successful", "success");
       })
       .catch((error) => {
         if (error.code === "ERR_NETWORK") {
-          modalAlert("Couldn't connect to server");
+          showAlert("Couldn't connect to server");
         } else if (error.response.status === 404) {
-          modalAlert("User not found");
+          showAlert("User not found");
         }
         setLoading(false);
       });
@@ -71,6 +74,7 @@ export default function MoneyTransfer() {
     <div className="transfer-container">
       <form className="form-container" onSubmit={handleSubmit}>
         <h3 className="transfer-title">Bank transfer</h3>
+        <FlashAlert show={showModal} value={alertValue}  type={alertType}/>
         <FormInput
           name="receiverAccountNumber"
           placeholder="Account Number"
@@ -91,13 +95,7 @@ export default function MoneyTransfer() {
         />
         <FormInput className="transfer-button" type="submit" value="Transfer" />
       </form>
-      <ModalBox
-        onClose={() => {
-          setShowModal(false);
-        }}
-        value={modalValue}
-        show={showModal}
-      />
+
       <LoadingBox show={showLoading} />
     </div>
   );

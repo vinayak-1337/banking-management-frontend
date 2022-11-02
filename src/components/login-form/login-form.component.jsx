@@ -3,8 +3,9 @@ import FormInput from "../form-input/form-input.component";
 import Axios from "axios";
 import { UserContext } from "../../context/user.context";
 import { Link, useNavigate } from "react-router-dom";
-import ModalBox from "../modal-box/modal-box.component";
 import LoadingBox from "../loading-box/loading-box.component";
+
+import FlashAlert from "../flash-alert/flash-alert.component";
 
 import "./login-form.styles.css"
 
@@ -92,9 +93,9 @@ export default function LoginForm() {
 
   return (
     <div className="login-container">
-      {/* <p className="message"></p> */}
       <form className="form-container" onSubmit={handleSubmit}>
         <h3 className="login-greetings">Hello Again!</h3>
+        <FlashAlert show={showModal} value={modalValue}/>
         <FormInput
           name="username"
           type="text"
@@ -118,13 +119,6 @@ export default function LoginForm() {
           First Time User? <Link to="/register">Register Here</Link>
         </p>
       </form>
-      <ModalBox
-        onClose={() => {
-          setShowModal(false);
-        }}
-        value={modalValue}
-        show={showModal}
-      />
       <LoadingBox show={showLoading} />
     </div>
   );

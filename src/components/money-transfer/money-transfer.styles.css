@@ -10,6 +10,11 @@
   font-size: 18px;
   background-color: #fff;
 }
+.transfer-input::-webkit-outer-spin-button,
+.transfer-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 .transfer-title {
   margin: 30px 0;
