@@ -43,7 +43,7 @@ export default function Navigations() {
           {Object.keys(currentUser).length !== 0 && (
             <div className="header-link fund-transfer">
               Fund Transfer
-              <div className="fund-hover">
+              <div className="fund-dropdown">
                 <Link to="dashboard/self-transfer">Self transfer</Link>
                 <Link to="dashboard/other-transfer">Other bank transfer</Link>
               </div>
@@ -54,11 +54,14 @@ export default function Navigations() {
         </div>
         <div className="right">
           {name && (
-            <p id="user-greeting">
+            <div id="user">
               {" "}
               {`Hello, ${name.split(" ")[0]}`}{" "}
               <img src={DropdownIcon} alt="dropdown" />
-            </p>
+              <div className="user-dropdown">
+                <Link to="/dashboard">My Profile</Link>
+              </div>
+            </div>
           )}
           {Object.keys(currentUser).length === 0 ? (
             <Link className="header-login" to="login">

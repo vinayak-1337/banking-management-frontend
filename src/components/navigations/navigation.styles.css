@@ -31,13 +31,30 @@ header div {
   color: #1726f3;
 }
 
-#user-greeting {
+#user {
   font-weight: 600;
   cursor: pointer;
+  position: relative;
 }
 
-#user-greeting img{
+#user img {
   width: 9px;
+}
+
+#user:hover .user-dropdown,
+.user-dropdown:hover {
+  display: flex;
+}
+
+.user-dropdown {
+  display: none;
+  position: absolute;
+  bottom: -50px;
+  width: 120px;
+  height: 50px;
+  border: 2px solid #e0e4ee;
+  background-color: #f3efef;
+  border-radius: 5px;
 }
 
 header .middle {
@@ -49,11 +66,12 @@ header .middle {
   position: relative;
 }
 
-.fund-transfer:hover .fund-hover, .fund-hover:hover {
+.fund-transfer:hover .fund-dropdown,
+.fund-dropdown:hover {
   display: flex;
 }
 
-.fund-hover {
+.fund-dropdown {
   position: absolute;
   display: none;
   flex-direction: column;
