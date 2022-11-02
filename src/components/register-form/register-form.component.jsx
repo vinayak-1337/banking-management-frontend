@@ -48,7 +48,7 @@ export default function RegisterForm() {
         setFormField(defaultFormField);
         modalAlert("Registration successful");
         setTimeout(() => {
-          navigate("/");
+          navigate("/login");
         }, 3000);
       })
       .catch((error) => {
