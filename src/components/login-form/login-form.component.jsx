@@ -7,7 +7,7 @@ import LoadingBox from "../loading-box/loading-box.component";
 
 import FlashAlert from "../flash-alert/flash-alert.component";
 
-import "./login-form.styles.css"
+import "./login-form.styles.css";
 
 const defaultFormField = {
   username: "",
@@ -20,10 +20,10 @@ export default function LoginForm() {
   const [modalValue, setModalValue] = useState("");
   const [showLoading, setLoading] = useState(false);
   const { username, password } = formField;
-  const {currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
   const navigate = useNavigate();
 
-  if(Object.keys(currentUser).length !== 0) {
+  if (Object.keys(currentUser).length !== 0) {
     navigate("/dashboard");
   }
 
@@ -81,10 +81,7 @@ export default function LoginForm() {
       .catch((error) => {
         if (error.code === "ERR_NETWORK") {
           modalAlert("Couldn't connect to server");
-        } else if (
-          error.response.status === 403 ||
-          error.response.status === 404
-        ) {
+        } else if (error.response.status === 401) {
           modalAlert("Incorrect username or password!");
         }
         setLoading(false);
@@ -95,7 +92,7 @@ export default function LoginForm() {
     <div className="login-container">
       <form className="form-container" onSubmit={handleSubmit}>
         <h3 className="login-greetings">Hello Again!</h3>
-        <FlashAlert show={showModal} value={modalValue}/>
+        <FlashAlert show={showModal} value={modalValue} />
         <FormInput
           name="username"
           type="text"
