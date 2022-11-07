@@ -54,9 +54,10 @@ export default function RegisterForm() {
         }, 1000);
       })
       .catch((error) => {
+        console.log(error.response);
         if (error.code === "ERR_NETWORK") {
           modalAlert("Couldn't connect to server");
-        } else if (error.response.data === "duplicate entry") {
+        } else if (error.response.data === "username already exists") {
           modalAlert("User already exist");
         }
         setLoading(false);
