@@ -107,12 +107,35 @@ header .middle {
 #logo {
   width: 50px;
 }
+.mobile-nav-button {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    margin: 0;
+    padding: 10px 0;
+  }
+  header .middle {
+    column-gap: 10px;
+  }
+}
 
 @media only screen and (max-width: 600px) {
-  header {
-    margin: 0 0 10px 0;
-  }
   header > .middle {
     display: none;
+  }
+  #title {
+    font-size: 20px;
+  }
+  #logo {
+    width: 40px;
+  }
+  .header-logout {
+    padding: 5px 10px;
+  }
+  .mobile-nav-button {
+    display: inline-block;
+    font-size: 25px;
   }
 } 

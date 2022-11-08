@@ -3,11 +3,15 @@ import { UserContext } from "../../context/user.context";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 import logo from "../../assets/logo.png";
-import DropdownIcon from "../../assets/dropdown.png";
 import "./navigation.styles.css";
+
+import DropdownIcon from "../../assets/dropdown.png";
+import MobileNav from "../mobile-nav/mobile-nav.component";
+import { useState } from "react";
 
 export default function Navigations() {
   const { currentUser, setCurrentUser } = useContext(UserContext);
+  const [showNav, setShowNav] = useState(false);
   const { name } = currentUser;
   const navigate = useNavigate();
 
@@ -34,6 +38,11 @@ export default function Navigations() {
     <>
       <header className="App-header">
         <div className="left">
+          {Object.keys(currentUser).length !== 0 && (
+            <div className="mobile-nav-button" onClick={() => setShowNav(true)}>
+              &#9776;
+            </div>
+          )}
           <img id="logo" src={logo} alt="logo" />
           <Link to="/">
             <h1 id="title">Secure</h1>
@@ -57,7 +66,11 @@ export default function Navigations() {
             <div id="user">
               {" "}
               {`Hello, ${name.split(" ")[0]}`}{" "}
-              <img src={DropdownIcon} alt="dropdown" />
+              <img
+                className="desktop-image"
+                src={DropdownIcon}
+                alt="dropdown"
+              />
               <div className="user-dropdown">
                 <Link to="/dashboard">My Profile</Link>
                 <Link to="dashboard/transaction">Transactions</Link>
@@ -75,6 +88,12 @@ export default function Navigations() {
           )}
         </div>
       </header>
+      <MobileNav
+        show={showNav}
+        onClose={() => {
+          setShowNav(false);
+        }}
+      />
       <Outlet />
     </>
   );

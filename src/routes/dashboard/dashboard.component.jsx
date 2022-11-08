@@ -23,7 +23,7 @@ export default function Dashboard() {
   }, []);
   return (
     <div className="dashboard-container">
-      <img src={DashboardImage} alt="dashboard" />
+      <img className="desktop-image" src={DashboardImage} alt="dashboard" />
       <Outlet />
     </div>
   );

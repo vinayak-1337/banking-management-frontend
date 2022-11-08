@@ -42,14 +42,37 @@ footer {
   text-align: center;
 }
 
+@media screen and (max-width: 1200px) {
+  #transfer-image {
+    display: none;
+  }
+  #card-image {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .main-container .left {
+    font-size: 45px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main-container {
+    margin: 40px 0 0 0;
+    align-items: center;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .main-container {
+    margin: 0;
     flex-direction: column-reverse;
     row-gap: 20px;
   }
   .main-container .left {
-    font-size: 45px;
     width: auto;
+    text-align: center;
   }
   .main-container .right {
     flex-direction: column-reverse;
@@ -61,12 +84,13 @@ footer {
     width: 100%;
     height: 210px;
   }
-  #transfer-image{
-    /* display: none; */
+  #transfer-image {
+    display: block;
     width: 100px;
+    transform: rotate(90deg);
   }
   footer {
     width: 100%;
     padding: 10px 0;
   }
-} 
+}

@@ -39,3 +39,13 @@
   font-weight: 700;
   width: 150px;
 }
+
+@media only screen and (max-width: 600px) {
+  .profile-container {
+    width: 100%;
+    margin: 0;
+  }
+  .profile-container > p > span {
+    width: 130px;
+  }
+}

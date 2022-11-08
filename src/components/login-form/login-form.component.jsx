@@ -89,7 +89,7 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="login-container">
+    <div className="page-container">
       <form className="form-container" onSubmit={handleSubmit}>
         <h3 className="login-greetings">Hello Again!</h3>
         <FlashAlert show={showModal} value={modalValue} />

@@ -4,7 +4,7 @@ import { UserContext } from "../../context/user.context";
 import "./transactions.styles.css";
 
 export default function Transactions() {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   const [transactionHistory, setTransactionHistory] = useState([]);
   useEffect(() => {
     if (currentUser.accountNumber !== undefined) {

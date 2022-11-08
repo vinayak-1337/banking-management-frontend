@@ -5,10 +5,10 @@ import "./login.styles.css"
 
 export default function Login() {
   
-  return(
+  return (
     <div className="login-page-container">
-      <img src={MobileImage} alt="mobile" />
-      <LoginForm/>
+      <img className="desktop-image" src={MobileImage} alt="mobile" />
+      <LoginForm />
     </div>
-  )
+  );
 }

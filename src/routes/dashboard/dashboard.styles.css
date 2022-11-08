@@ -3,3 +3,12 @@
   justify-content: space-between;
   align-items: center;
 }
+
+@media screen and (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+  .dashboard-container > .desktop-image {
+    width: 350px;
+  }
+}

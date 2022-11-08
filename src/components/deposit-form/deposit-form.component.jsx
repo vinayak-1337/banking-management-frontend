@@ -60,7 +60,7 @@ export default function DepositForm() {
   };
 
   return (
-    <div className="deposit-container">
+    <div className="page-container">
       <form className="form-container" onSubmit={handleSubmit}>
         <h3 className="deposit-title">Self Transfer</h3>
         <FlashAlert value={alertValue} show={showModal} type={alertType} />

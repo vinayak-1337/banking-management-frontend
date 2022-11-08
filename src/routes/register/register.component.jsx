@@ -6,7 +6,7 @@ import "./register.styles.css";
 export default function Register() {
   return (
     <div className="register-page-container">
-      <img src={MobileImage} alt="mobile" />
+      <img className="desktop-image" src={MobileImage} alt="mobile" />
       <RegisterForm />
     </div>
   );

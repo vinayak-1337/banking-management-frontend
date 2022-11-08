@@ -65,7 +65,7 @@ export default function RegisterForm() {
   };
 
   return (
-    <div className="register-container">
+    <div className="page-container">
       <form className="form-container" onSubmit={handleSubmit}>
       <h3 className="register-greetings">Get Started</h3>
       <FlashAlert show={showModal} value={modalValue} type={alertType}/>
