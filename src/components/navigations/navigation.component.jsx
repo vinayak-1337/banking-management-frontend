@@ -60,6 +60,7 @@ export default function Navigations() {
               <img src={DropdownIcon} alt="dropdown" />
               <div className="user-dropdown">
                 <Link to="/dashboard">My Profile</Link>
+                <Link to="dashboard/transaction">Transactions</Link>
               </div>
             </div>
           )}

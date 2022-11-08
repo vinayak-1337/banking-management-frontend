@@ -8,6 +8,7 @@ import DepositForm from "./components/deposit-form/deposit-form.component";
 import Profile from "./components/profile/profile.components";
 import Login from "./routes/login/login.component";
 import Register from "./routes/register/register.component";
+import Transactions from "./components/transactions/transactions.component";
 
 function MainRoutes() {
   return (
@@ -18,6 +19,7 @@ function MainRoutes() {
           <Route index element={<Profile />} />
           <Route path="self-transfer" element={<DepositForm />} />
           <Route path="other-transfer" element={<MoneyTransfer />} />
+          <Route path="transaction" element={<Transactions/>} />
         </Route>
         <Route path="profile" element={<Profile />} />
         <Route path="login" element={<Login />} />
