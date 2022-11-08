@@ -59,6 +59,7 @@ export default function MoneyTransfer() {
           balance: currentUser.balance - amount,
         });
         showAlert("Transfer successful", "success");
+        setFormField(defaultFormField);
       })
       .catch((error) => {
         if (error.code === "ERR_NETWORK") {
