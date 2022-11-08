@@ -41,3 +41,32 @@ footer {
   width: calc(100% - 200px);
   text-align: center;
 }
+
+@media only screen and (max-width: 600px) {
+  .main-container {
+    flex-direction: column-reverse;
+    row-gap: 20px;
+  }
+  .main-container .left {
+    font-size: 45px;
+    width: auto;
+  }
+  .main-container .right {
+    flex-direction: column-reverse;
+  }
+  #get-started-button {
+    font-size: 20px;
+  }
+  #card-image {
+    width: 100%;
+    height: 210px;
+  }
+  #transfer-image{
+    /* display: none; */
+    width: 100px;
+  }
+  footer {
+    width: 100%;
+    padding: 10px 0;
+  }
+} 

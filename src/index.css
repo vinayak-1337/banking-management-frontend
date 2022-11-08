@@ -13,9 +13,17 @@ body {
   padding: 0 100px;
   /*background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
   background-repeat: no-repeat;*/
-  height: 100vh;
+  min-height: 100vh;
+  position: relative;
 }
 
 #root {
   height: 100%;
 }
+
+
+@media only screen and (max-width: 600px) {
+  body {
+    padding: 0 20px;
+  }
+} 
