@@ -1,7 +1,7 @@
 .profile-container {
   text-align: left;
   padding: 20px;
-  width: 450px;
+  min-width: 450px;
   border-radius: 5px;
   display: flex;
   flex-direction: column;

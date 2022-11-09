@@ -3,6 +3,8 @@ import Axios from "axios";
 import { UserContext } from "../../context/user.context";
 import "./transactions.styles.css";
 
+import { currencyFormatter } from "../profile/profile.components";
+
 export default function Transactions() {
   const { currentUser } = useContext(UserContext);
   const [transactionHistory, setTransactionHistory] = useState([]);
@@ -26,8 +28,7 @@ export default function Transactions() {
         <thead>
           <tr>
             <th>Transaction Id</th>
-            <th>Debit</th>
-            <th>Credit</th>
+            <th>Description</th>
             <th>Amount</th>
             <th>Time</th>
           </tr>
@@ -35,14 +36,24 @@ export default function Transactions() {
         <tbody>
           {transactionHistory
             ?.filter((_, index) => index < 10)
-            .map(({ transactionId, credit, debit, amount, time }) => {
+            .map(({ transactionId, to, from, amount, time }) => {
               const formatedTime = new Date(time).toLocaleString();
               return (
                 <tr key={transactionId}>
                   <td>{transactionId}</td>
-                  <td>{debit || "--"}</td>
-                  <td>{credit}</td>
-                  <td>{amount}</td>
+                  <td>
+                    {from == currentUser.accountNumber
+                      ? `NEFT/${to}/Paid`
+                      : from
+                      ? `NEFT/${from}/Received`
+                      : "To self"}
+                  </td>
+                  <td>
+                    <span style={{ fontWeight: 700 }}>
+                      {from == currentUser.accountNumber ? "-" : "+"}
+                    </span>{" "}
+                    {currencyFormatter.format(amount)}
+                  </td>
                   <td>{formatedTime}</td>
                 </tr>
               );

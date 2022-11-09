@@ -16,7 +16,7 @@
 
 table {
   border-spacing: 20px 8px;
-  text-align: center;
+  /* text-align: center; */
   border-collapse: collapse;
 }
 
@@ -27,6 +27,7 @@ tr:nth-child(even) {
 th,
 td {
   padding: 5px 10px;
+  border: 2px solid #f9f9f9;
 }
 
 @media screen and (max-width: 768px) {

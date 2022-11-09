@@ -1,10 +1,13 @@
-import { useContext} from "react";
+import { useContext } from "react";
 import { UserContext } from "../../context/user.context";
 import "./profile.styles.css";
+
+export const currencyFormatter = new Intl.NumberFormat("en-IN", {style:"currency", currency:"INR"});
 
 export default function Profile() {
   const { currentUser } = useContext(UserContext);
   const { name, age, username, balance, accountNumber } = currentUser;
+
 
   return (
     <div className="profile-container">
@@ -22,8 +25,7 @@ export default function Profile() {
         {username}
       </p>
       <p>
-        <span>Balance : </span>
-        {balance}
+        <span>Balance : </span>{currencyFormatter.format(balance)}
       </p>
       <p>
         <span>Account No. : </span>
