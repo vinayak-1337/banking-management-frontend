@@ -40,11 +40,16 @@
   width: 150px;
 }
 
+@media screen and (max-width: 992px) {
+  .profile-container {
+    margin: 0;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .profile-container {
     width: 100%;
     min-width: 100%;
-    margin: 0;
   }
   .profile-container > p > span {
     width: auto;

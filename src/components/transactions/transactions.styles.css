@@ -30,7 +30,7 @@ td {
   border: 2px solid #f9f9f9;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
   .transaction-container {
     margin: 0;
   }

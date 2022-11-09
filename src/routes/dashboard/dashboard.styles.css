@@ -4,13 +4,16 @@
   align-items: center;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 992px) {
   .dashboard-container {
     flex-direction: column;
   }
   .dashboard-container > .desktop-image {
     width: 350px;
   }
+}
+
+@media screen and (max-width: 768px) {
 }
 
 @media screen and (max-width: 600px) {
