@@ -15,6 +15,8 @@ export default function Navigations() {
   const { name } = currentUser;
   const navigate = useNavigate();
 
+  let isLogin = Object.keys(currentUser).length !== 0;
+
   useEffect(() => {
     const token = sessionStorage.getItem("accessToken");
     const config = {
@@ -38,18 +40,18 @@ export default function Navigations() {
     <>
       <header className="App-header">
         <div className="left">
-          {Object.keys(currentUser).length !== 0 && (
+          {isLogin && (
             <div className="mobile-nav-button" onClick={() => setShowNav(true)}>
               &#9776;
             </div>
           )}
           <img id="logo" src={logo} alt="logo" />
-          <Link to="/">
+          <Link to={isLogin ? "/dashboard" : "/"}>
             <h1 id="title">Secure</h1>
           </Link>
         </div>
         <div className="middle">
-          {Object.keys(currentUser).length !== 0 && (
+          {isLogin && (
             <div className="header-link fund-transfer">
               Fund Transfer
               <div className="fund-dropdown">
@@ -77,7 +79,7 @@ export default function Navigations() {
               </div>
             </div>
           )}
-          {Object.keys(currentUser).length === 0 ? (
+          {!isLogin ? (
             <Link className="header-login" to="login">
               login
             </Link>

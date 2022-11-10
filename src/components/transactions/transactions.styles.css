@@ -41,8 +41,15 @@ td {
     padding: 20px 0;
     font-size: 14px;
     margin: 0;
+    align-self: flex-start;
+    width: 100%;
+  }
+  table {
+    overflow: auto;
+    display: block;
+    white-space: nowrap;
   }
   th,td {
-    padding: 0 5px;
+    padding: 5px 10px;
   }
 }

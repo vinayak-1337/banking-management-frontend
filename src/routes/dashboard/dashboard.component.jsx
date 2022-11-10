@@ -17,6 +17,7 @@ export default function Dashboard() {
       Axios.get(`${process.env.REACT_APP_BASE_URL}/getUser`, config)
         .then((response) => {
           setCurrentUser({ ...response.data });
+          console.log("userData",response.data);
         })
         .catch((error) => console.log(error));
     // eslint-disable-next-line react-hooks/exhaustive-deps

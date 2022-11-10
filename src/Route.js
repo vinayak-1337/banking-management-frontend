@@ -9,21 +9,34 @@ import Profile from "./components/profile/profile.components";
 import Login from "./routes/login/login.component";
 import Register from "./routes/register/register.component";
 import Transactions from "./components/transactions/transactions.component";
+import ProtectedRoutes from "./components/ProtectedRoutes";
+import { UserContext } from "./context/user.context";
+import { useContext } from "react";
 
 function MainRoutes() {
+  const { currentUser } = useContext(UserContext);
+  let isLogin = sessionStorage.getItem("accessToken");
   return (
     <Routes>
       <Route path="/" element={<Navigations />}>
         <Route index element={<Home />} />
-        <Route path="dashboard" element={<Dashboard />}>
-          <Route index element={<Profile />} />
-          <Route path="self-transfer" element={<DepositForm />} />
-          <Route path="other-transfer" element={<MoneyTransfer />} />
-          <Route path="transaction" element={<Transactions/>} />
+        <Route element={<ProtectedRoutes condition={isLogin} navigateTo="/" />}>
+          <Route path="profile" element={<Profile />} />
+          <Route path="dashboard" element={<Dashboard />}>
+            <Route index element={<Profile />} />
+            <Route path="self-transfer" element={<DepositForm />} />
+            <Route path="other-transfer" element={<MoneyTransfer />} />
+            <Route path="transaction" element={<Transactions />} />
+          </Route>
         </Route>
-        <Route path="profile" element={<Profile />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
+        <Route
+          element={
+            <ProtectedRoutes condition={!isLogin} navigateTo="/dashboard" />
+          }
+        >
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Route>
       </Route>
     </Routes>
   );

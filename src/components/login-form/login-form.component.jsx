@@ -23,10 +23,6 @@ export default function LoginForm() {
   const { currentUser, setCurrentUser } = useContext(UserContext);
   const navigate = useNavigate();
 
-  if (Object.keys(currentUser).length !== 0) {
-    navigate("/dashboard");
-  }
-
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormField({
@@ -34,20 +30,6 @@ export default function LoginForm() {
       [name]: value,
     });
   };
-
-  useEffect(() => {
-    const token = sessionStorage.getItem("accessToken");
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-    token &&
-      Axios.get(`${process.env.REACT_APP_BASE_URL}/getUser`, config)
-        .then((response) => {
-          setCurrentUser({ ...response.data });
-        })
-        .catch((error) => console.log(error));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const modalAlert = (message) => {
     setModalValue(message);
