@@ -4,11 +4,15 @@ import { UserContext } from "../../context/user.context";
 import "./transactions.styles.css";
 
 import { currencyFormatter } from "../profile/profile.components";
+import LoadingBox from "../loading-box/loading-box.component";
 
 export default function Transactions() {
   const { currentUser } = useContext(UserContext);
   const [transactionHistory, setTransactionHistory] = useState([]);
+  const [showLoading, setLoading] = useState(false);
+
   useEffect(() => {
+    setLoading(true);
     if (currentUser.accountNumber !== undefined) {
       Axios.post(`${process.env.REACT_APP_BASE_URL}/transaction`, {
         accountNumber: currentUser.accountNumber,
@@ -18,6 +22,9 @@ export default function Transactions() {
         })
         .catch((error) => {
           console.log("transaction", error);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
   }, [currentUser]);
@@ -60,6 +67,7 @@ export default function Transactions() {
             })}
         </tbody>
       </table>
+      <LoadingBox show={showLoading} />
     </div>
   );
 }
