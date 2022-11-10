@@ -131,6 +131,10 @@ header .middle {
   #logo {
     width: 30px;
   }
+  #user:hover .user-dropdown,
+  .user-dropdown:hover {
+    display: none;
+  }
   .header-logout {
     padding: 5px 10px;
     font-size: 16px;
@@ -142,4 +146,4 @@ header .middle {
     display: inline-block;
     font-size: 25px;
   }
-} 
+}
